@@ -1,4 +1,5 @@
 import Observer from './observer.js'
+import Compiler from './compiler.js'
 /**
  * @description: Vue构造函数 接收options，初始化实例上的属性、方法，vue的入口
  */
@@ -11,10 +12,12 @@ class Vue {
       typeof options.el === 'string'
         ? document.querySelector(options.el)
         : options.el
-    // 2、遍历data中所有属性注入vue实例中,并重设其get、set方法
+    // 2、初始化复制data到vm下，遍历data中所有属性注入vue实例中,并重设其get、set方法
     this._proxyData(this.$data)
-    // 3、监听data变化通知监听者
+    // 3、初始化监听data，变化通知监听者
     new Observer(this.$data)
+    // 4、初始化编译节点
+    new Compiler(this)
   }
   // 将data复制到vue实例中
   _proxyData(data) {
@@ -25,11 +28,9 @@ class Vue {
         enumerable: true,
         configurable: true,
         get() {
-          console.log('get-vm: ', data[key])
           return data[key]
         },
         set(newValue) {
-          console.log('set-vm: ', newValue)
           if (data[key] === newValue) {
             return
           }

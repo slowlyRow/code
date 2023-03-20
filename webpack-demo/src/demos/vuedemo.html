@@ -8,6 +8,7 @@
   <div id="hello">
     <div>dd</div>
     {{myname}}
+    <div v-text="nest"></div>
   </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
@@ -15,7 +16,10 @@
   new Vue({
     el: '#hello',
     data: {
-      myname: 'demos'
+      myname: 'demos',
+      nest: {
+        one: 1
+      }
     }
   })
 </script>

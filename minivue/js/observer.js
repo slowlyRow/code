@@ -1,3 +1,5 @@
+import Dep from './dep.js'
+
 /**
  * @description: Obserber 给data属性重设get、set，用于通知变化
  */
@@ -19,25 +21,33 @@ class Observer {
    * @param {*} data
    * @param {*} key
    * @param {*} val
-   * @return {*}
    */
   defineReactive(data, key, val) {
+    let _this = this
+    let dep = new Dep()
+    // 初始化递归
+    if (typeof val === 'object') {
+      _this.walk(val)
+    }
     Object.defineProperty(data, key, {
       enumerable: true,
       configurable: true,
       get() {
-        console.log('get-data: ', val)
+        // 将watcher作为target添加到dep依赖管理中
+        Dep.target && dep.addSub(Dep.target)
         return val
       },
       set(newValue) {
-        console.log('set-data: ', newValue)
         if (val === newValue) {
           return
         }
 
         val = newValue
-        // 通知vue更新
-        document.querySelector('#app').innerText = val
+        if (typeof newValue === 'object') {
+          _this.walk(newValue)
+        }
+        // 通知dep依赖更新
+        dep.notify()
       },
     })
   }

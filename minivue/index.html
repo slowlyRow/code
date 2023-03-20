@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <div id="app">vm.wen</div>
-    <script type="module">
-      import Vue from './js/vue.js'
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" a="1dddddddfghgjythr" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>minivue</title>
+</head>
 
-      const vm = new Vue({
-        el: '#app',
-        data: {
-          wen: 'first',
+<body>
+  <div id="app">
+    <div>{{ express }}</div>
+    <div v-text="wen"></div>
+    <input type="text" v-model="person.name">
+    <div>{{ person.name }}</div>
+  </div>
+  <script type="module">
+    import Vue from './js/vue.js'
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        express: 'text',
+        wen: 'first',
+        person: {
+          name: 'wj'
         },
-      })
-      console.log(vm)
-      window.vm = vm
-    </script>
-  </body>
+      },
+    })
+    console.log(vm)
+    // // 重置data属性指向
+    vm.wen = { profile: 'people' }
+    window.vm = vm
+    console.log(22)
+  </script>
+</body>
+
 </html>
