@@ -10,6 +10,9 @@ const renderer = createBundleRenderer(serverBundle, {
   clientManifest,
 });
 
+const isProd = process.env.NODE_ENV;
+console.log('mode', isProd);
+
 app.use(express.static('dist/client'));
 
 app.get('*', (req, res) => {

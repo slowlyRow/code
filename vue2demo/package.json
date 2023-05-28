@@ -9,7 +9,7 @@
     "build:server": "pnpm lint && VUE_CLI_MODE=server vue-cli-service build",
     "build:ssr": "pnpm build:client && pnpm build:server",
     "build:servering": "node server.js",
-    "build:all": "pnpm build:ssr && pnpm build:servering",
+    "build:run": "pnpm build:ssr && pnpm build:servering",
     "lint": "eslint --fix"
   },
   "dependencies": {
