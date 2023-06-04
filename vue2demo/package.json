@@ -7,6 +7,7 @@
     "build": "pnpm lint && pnpm build:client && pnpm build:server",
     "build:client": "VUE_CLI_MODE=client vue-cli-service build",
     "build:server": "VUE_CLI_MODE=server vue-cli-service build",
+    "build:ssr": "NODE_ENV=production pnpm node",
     "node": "node server.js",
     "lint": "eslint --fix"
   },
