@@ -11,7 +11,7 @@ module.exports = defineConfig(() => {
       publicPath: './',
       configureWebpack: {
         target: 'web',
-        entry: './src/entry/entry-client.ts',
+        entry: './src/entry/entry-client.js',
         plugins: [new VueSSRClientPlugin()],
       },
     };
@@ -22,7 +22,7 @@ module.exports = defineConfig(() => {
     publicPath: './',
     configureWebpack: {
       target: 'node',
-      entry: './src/entry/entry-server.ts',
+      entry: './src/entry/entry-server.js',
       output: {
         libraryTarget: 'commonjs2',
       },
