@@ -1,36 +1,73 @@
-const express = require('express');
-const { createBundleRenderer } = require('vue-server-renderer');
-const serverBundle = require('./dist/server/vue-ssr-server-bundle.json');
-const clientManifest = require('./dist/client/vue-ssr-client-manifest.json');
+const express = require('express')
+const { createBundleRenderer } = require('vue-server-renderer')
+const setupDevServer = require('./setup-dev-server')
 
-const app = express();
-const renderer = createBundleRenderer(serverBundle, {
-  runInNewContext: false,
-  template: require('fs').readFileSync('./public/index.html', 'utf-8'),
-  clientManifest,
-});
+// 启动服务器
+const app = express()
 
-const isProd = process.env.NODE_ENV;
-console.log('mode', isProd);
+let renderer
 
-app.use(express.static('dist/client'));
+const isProd = process.env.NODE_ENV
+let onReadyDev
 
-app.get('*', (req, res) => {
-  const context = { url: req.url };
+if (isProd) {
+  // 生产环境
+  /* eslint-disable-next-line global-require */
+  const serverBundle = require('./dist/server/vue-ssr-server-bundle.json')
+  /* eslint-disable-next-line global-require */
+  const clientManifest = require('./dist/client/vue-ssr-client-manifest.json')
+  /* eslint-disable-next-line global-require */
+  const template = require('fs').readFileSync('./public/index.html', 'utf-8')
+
+  // 处理模板渲染server-client
+  renderer = createBundleRenderer(serverBundle, {
+    runInNewContext: false,
+    template,
+    clientManifest,
+  })
+} else {
+  // 开发环境
+  // 持续监听文件变化，并重新处理模板，然后更新页面
+  onReadyDev = Promise.resolve(
+    setupDevServer(app, (serverBundle, template, clientManifest) => {
+      renderer = createBundleRenderer(serverBundle, {
+        runInNewContext: false,
+        template,
+        clientManifest,
+      })
+    })
+  )
+}
+
+// 静态资源服务
+app.use(express.static('dist/client'))
+
+// 渲染
+const render = (req, res) => {
+  const context = { url: req.url }
 
   renderer.renderToString(context, (err, html) => {
     if (err) {
       if (err.code === 404) {
-        res.status(404).end('Page not found');
+        res.status(404).end('Page not found')
       } else {
-        res.status(500).end('Internal Server Error');
+        res.status(500).end('Internal Server Error')
       }
     } else {
-      res.send(html);
+      res.send(html)
     }
-  });
-});
+  })
+}
 
+const renderDev = (req, res) => {
+  // 实时处理模板渲染，并更新页面
+  onReadyDev.then(() => {
+    render(req, res)
+  })
+}
+app.get('*', isProd ? render : renderDev)
+
+// 端口监听
 app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
+  console.log('Server is running on http://localhost:3000')
+})
