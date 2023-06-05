@@ -75,7 +75,7 @@ const baseConfig = {
 module.exports = {
   serverConfig: merge(baseConfig, {
     target: 'node',
-    entry: './src/entry/entry-server.js',
+    entry: './src/entry/entry-server.ts',
     output: {
       libraryTarget: 'commonjs2',
       path: path.resolve(__dirname, 'dist/server'),
@@ -90,7 +90,7 @@ module.exports = {
   }),
   clientConfig: merge(baseConfig, {
     target: 'web',
-    entry: './src/entry/entry-client.js',
+    entry: './src/entry/entry-client.ts',
     output: {
       path: path.resolve(__dirname, 'dist/client'),
     },
