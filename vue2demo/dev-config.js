@@ -13,6 +13,9 @@ const baseConfig = {
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
@@ -36,14 +39,22 @@ const baseConfig = {
           'sass-loader',
         ],
       },
-      { test: /\.ts$/, use: 'ts-loader' },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/i,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8192,
+              esModule: false,
             },
           },
         ],
@@ -80,22 +91,6 @@ module.exports = {
   clientConfig: merge(baseConfig, {
     target: 'web',
     entry: './src/entry/entry-client.js',
-    // module: {
-    //   rules: [
-    //     {
-    //       test: /\.m?js$/,
-    //       exclude: /(node_modules|bower-components)/,
-    //       use: {
-    //         loader: 'babel-loader',
-    //         options: {
-    //           presets: ['@babel/preset-env'],
-    //           cacheDirectory: true,
-    //           plugins: ['@babel/plugin-transform-runtime'],
-    //         },
-    //       },
-    //     },
-    //   ],
-    // },
     output: {
       path: path.resolve(__dirname, 'dist/client'),
     },

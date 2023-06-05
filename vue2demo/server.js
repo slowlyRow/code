@@ -7,7 +7,7 @@ const app = express()
 
 let renderer
 
-const isProd = process.env.NODE_ENV
+const isProd = process.env.NODE_ENV === 'production'
 let onReadyDev
 
 if (isProd) {
@@ -43,20 +43,29 @@ if (isProd) {
 app.use(express.static('dist/client'))
 
 // 渲染
-const render = (req, res) => {
-  const context = { url: req.url }
-
-  renderer.renderToString(context, (err, html) => {
-    if (err) {
-      if (err.code === 404) {
-        res.status(404).end('Page not found')
-      } else {
-        res.status(500).end('Internal Server Error')
-      }
-    } else {
-      res.send(html)
+const render = async (req, res) => {
+  try {
+    const context = {
+      url: req.url,
+      // 使用vue-meta插件代替
+      // title: 'ssr demo',
+      // meta: `
+      // <meta name="description" content="ssr" />
+      // `,
     }
-  })
+
+    // renderer.renderToString 接受多种入参方式
+    const html = await renderer.renderToString(context)
+
+    // res.setHeader('Content-type','text/html; charset=utf-8')
+    res.send(html)
+  } catch (err) {
+    if (err.code === 404) {
+      res.status(404).end('Page not found')
+    } else {
+      res.status(500).end('Internal Server Error')
+    }
+  }
 }
 
 const renderDev = (req, res) => {

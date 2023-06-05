@@ -1,4 +1,9 @@
 import createApp from '../main';
 
-const app = createApp();
-app.$mount('#app', true);
+const { app, router } = createApp();
+
+router.onReady(() => {
+  app.$mount('#app', true);
+}, ((err) => {
+  throw new Error('mount-err', err)
+}))

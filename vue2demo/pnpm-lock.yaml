@@ -13,6 +13,9 @@ dependencies:
   vue-class-component:
     specifier: ^7.2.6
     version: 7.2.6(vue@2.6.14)
+  vue-meta:
+    specifier: ^2.4.0
+    version: 2.4.0
   vue-property-decorator:
     specifier: ^9.1.2
     version: 9.1.2(vue-class-component@7.2.6)(vue@2.6.14)
@@ -117,6 +120,9 @@ devDependencies:
   style-loader:
     specifier: ^3.3.3
     version: 3.3.3(webpack@5.84.1)
+  ts-loader:
+    specifier: ^9.4.3
+    version: 9.4.3(typescript@4.5.5)(webpack@5.84.1)
   typescript:
     specifier: ~4.5.5
     version: 4.5.5
@@ -2258,7 +2264,7 @@ packages:
       fork-ts-checker-webpack-plugin: 6.5.3(eslint@7.32.0)(typescript@4.5.5)(vue-template-compiler@2.6.14)(webpack@5.84.1)
       globby: 11.1.0
       thread-loader: 3.0.4(webpack@5.84.1)
-      ts-loader: 9.4.2(typescript@4.5.5)(webpack@5.84.1)
+      ts-loader: 9.4.3(typescript@4.5.5)(webpack@5.84.1)
       typescript: 4.5.5
       vue: 2.6.14
       vue-template-compiler: 2.6.14
@@ -4098,7 +4104,6 @@ packages:
   /deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /default-gateway@6.0.3:
     resolution: {integrity: sha512-fwSOJsbbNzZ/CUFpqFBqYfYNLj1NbMPm8MMCIzHjC83iSJRBEGmDUxU+WP661BaBQImeC2yHwXtz+P/O9o+XEg==}
@@ -8519,8 +8524,8 @@ packages:
     resolution: {integrity: sha512-0z3j8R7MCjy10kc/g+qg7Ln3alJTodw9aDuVWZa3uiWqfuBMKeAeP2ocWcxoyM3D73yz3Jt/Pu4qPr4wHSdB/Q==}
     dev: true
 
-  /ts-loader@9.4.2(typescript@4.5.5)(webpack@5.84.1):
-    resolution: {integrity: sha512-OmlC4WVmFv5I0PpaxYb+qGeGOdm5giHU7HwDDUjw59emP2UYMHy9fFSDcYgSNoH8sXcj4hGCSEhlDZ9ULeDraA==}
+  /ts-loader@9.4.3(typescript@4.5.5)(webpack@5.84.1):
+    resolution: {integrity: sha512-n3hBnm6ozJYzwiwt5YRiJZkzktftRpMiBApHaJPoWLA+qetQBAXkHqCLM6nwSdRDimqVtA5ocIkcTRLMTt7yzA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       typescript: '*'
@@ -8973,6 +8978,12 @@ packages:
       watchpack: 2.4.0
       webpack: 5.84.1
     dev: true
+
+  /vue-meta@2.4.0:
+    resolution: {integrity: sha512-XEeZUmlVeODclAjCNpWDnjgw+t3WA6gdzs6ENoIAgwO1J1d5p1tezDhtteLUFwcaQaTtayRrsx7GL6oXp/m2Jw==}
+    dependencies:
+      deepmerge: 4.3.1
+    dev: false
 
   /vue-property-decorator@9.1.2(vue-class-component@7.2.6)(vue@2.6.14):
     resolution: {integrity: sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==}
