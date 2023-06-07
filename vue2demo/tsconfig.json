@@ -34,7 +34,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/main.ts", "src/entry/entry-server.ts", "src/entry/entry-client.ts"  ],
+, "src/main.ts", "src/entry/entry-server.ts", "src/entry/entry-client.ts", "src/store/modules/about.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -5,9 +5,9 @@ Vue.use(VueMeta)
 
 Vue.mixin({
   metaInfo: {
-    meta: [
-      { name: 'description', content: 'ssr' },
-    ],
+    // meta: [
+    //   { name: 'description', content: 'ssr' },
+    // ],
     titleTemplate: '%s-ssr',
   },
 })

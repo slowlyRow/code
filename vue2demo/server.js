@@ -44,6 +44,8 @@ app.use(express.static('dist/client'))
 
 // 渲染
 const render = async (req, res) => {
+  console.log('req----: ', req);
+  // accept
   try {
     const context = {
       url: req.url,
@@ -57,7 +59,7 @@ const render = async (req, res) => {
     // renderer.renderToString 接受多种入参方式
     const html = await renderer.renderToString(context)
 
-    // res.setHeader('Content-type','text/html; charset=utf-8')
+    res.setHeader('Content-type', 'text/html; charset=utf-8')
     res.send(html)
   } catch (err) {
     if (err.code === 404) {
