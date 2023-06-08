@@ -13,10 +13,14 @@ import { mapState } from 'vuex'
 import storeAbout from '../store/modules/about'
 
 export default {
-  asyncData({ store }) {
-    store.registerModule('about', storeAbout)
-    console.log('store: ', store);
-    return store.dispatch('about/getKeywords')
+  asyncData({ store, client }) {
+    if (!store.hasModule('about')) {
+      store.registerModule('about', storeAbout)
+    }
+    if (!client) {
+      return store.dispatch('about/getKeywords')
+    }
+    return null
   },
   metaInfo: {
     title: '哎哟',
@@ -28,7 +32,6 @@ export default {
     ...mapState('about', ['keywords']),
     searchKeys() {
       // return this.$store.state.about.keywords || []
-      console.log('this.$store: ', this.$store);
       return this.keywords || []
     },
   },

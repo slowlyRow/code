@@ -4,12 +4,12 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { isServer } from '@/help/base'
 
 export function get(url: string, params?:any, config?: AxiosRequestConfig) {
-  console.log('isServer: ', isServer);
   const serverConfig = {
     withCredentials: true,
   }
   const clientConfig = {}
   const envConfig = isServer ? serverConfig : clientConfig
+  // eslint-disable-next-line no-param-reassign
   config = Object.assign(config || {}, envConfig)
 
   return axios.get(url, { ...config, params: params || {} })

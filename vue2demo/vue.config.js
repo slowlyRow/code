@@ -8,7 +8,7 @@ module.exports = defineConfig(() => {
   if (process.env.VUE_CLI_MODE === 'client') {
     return {
       outputDir: path.resolve(__dirname, 'dist/client'),
-      publicPath: './',
+      publicPath: '/dist',
       configureWebpack: {
         target: 'web',
         entry: './src/entry/entry-client.ts',
@@ -19,7 +19,7 @@ module.exports = defineConfig(() => {
   // 服务端配置
   return {
     outputDir: path.resolve(__dirname, 'dist/server'),
-    publicPath: './',
+    publicPath: '/dist',
     configureWebpack: {
       target: 'node',
       entry: './src/entry/entry-server.ts',

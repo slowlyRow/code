@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import AboutView from '../views/AboutView.vue';
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/about',
     name: 'about',
-    component: () => import('../views/AboutView.vue'),
+    // component: () => import('../views/AboutView.vue'),
+    component: AboutView, // ！！！服务端渲染内容的页面/组件不能异步加载！！！
   },
   {
     path: '*',

@@ -28,6 +28,7 @@ export default async (context: { meta: VueMetaPlugin, url: string, state: object
               return Component.asyncData({
                 store,
                 route: router.currentRoute,
+                client: false,
               })
             }
             return []

@@ -39,8 +39,8 @@ if (isProd) {
   )
 }
 
-// 静态资源服务
-app.use(express.static('dist/client'))
+// 静态资源服务(/dist服务目录，dist/client客户端服务资源目录)
+app.use('/dist', express.static('dist/client'))
 
 // 渲染
 const render = async (req, res) => {
@@ -73,6 +73,12 @@ const renderDev = (req, res) => {
   // 实时处理模板渲染，并更新页面
   onReadyDev.then(() => {
     render(req, res)
+  }).catch((err) => {
+    if (err.code === 404) {
+      res.status(404).end('Page not found')
+    } else {
+      res.status(500).end('Internal Server Error')
+    }
   })
 }
 app.get('*', isProd ? render : renderDev)

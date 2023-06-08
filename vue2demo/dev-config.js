@@ -9,7 +9,7 @@ const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development
 const baseConfig = {
   mode,
   output: {
-    publicPath: './',
+    publicPath: '/dist',
   },
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],

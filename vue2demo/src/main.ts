@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './meta'
+// eslint-disable-next-line import/order
 import { sync } from 'vuex-router-sync'
 
 Vue.config.productionTip = false;

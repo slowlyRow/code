@@ -1,4 +1,5 @@
 // about
+// eslint-disable-next-line import/extensions
 import { get } from '@/http/index.ts'
 
 export default {
