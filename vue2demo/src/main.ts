@@ -9,7 +9,9 @@ Vue.config.productionTip = false;
 
 export default () => {
   // 同步路由状态(route state)到 store
-  sync(store, router)
+  if (store && router) {
+    sync(store, router)
+  }
 
   return {
     app: new Vue({

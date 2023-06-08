@@ -44,7 +44,6 @@ app.use(express.static('dist/client'))
 
 // 渲染
 const render = async (req, res) => {
-  console.log('req----: ', req);
   // accept
   try {
     const context = {
